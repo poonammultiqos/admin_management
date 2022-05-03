@@ -32,7 +32,6 @@ const UserSchema = new dynamoose.Schema({
         },
         "bdm_id" : { //if role is bde
             type : Number,
-            required : true,
         }
     },
     {
