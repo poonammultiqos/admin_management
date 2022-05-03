@@ -1,14 +1,17 @@
 const dynamoose = require("dynamoose");
 
-const RoleSchema = new dynamoose.Schema({
-        "id":{
-            type:String,
+const CountrySchema = new dynamoose.Schema({
+        "id": {
+            type: String,
             hashKey: true,
             required: true,
         },
         "name": {
             type: String,
             required: true
+        },
+        "code": {
+            type: Number
         }
     },
     {
@@ -18,4 +21,4 @@ const RoleSchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('roles', RoleSchema);
+module.exports = dynamoose.model('countries', CountrySchema);

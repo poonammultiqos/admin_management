@@ -1,6 +1,6 @@
 const dynamoose = require("dynamoose");
 
-const RoleSchema = new dynamoose.Schema({
+const StageSchema = new dynamoose.Schema({
         "id":{
             type:String,
             hashKey: true,
@@ -8,6 +8,7 @@ const RoleSchema = new dynamoose.Schema({
         },
         "name": {
             type: String,
+            rangeKey: true,
             required: true
         }
     },
@@ -18,4 +19,4 @@ const RoleSchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('roles', RoleSchema);
+module.exports = dynamoose.model('roles', StageSchema);
