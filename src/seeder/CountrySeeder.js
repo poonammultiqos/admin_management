@@ -1,8 +1,5 @@
-const AWS = require("aws-sdk");
-const config = require('../../src/connection/db');
-AWS.config.update(config.aws_remote_config);
-
-var dynamodb = new AWS.DynamoDB();module.exports = {
+let countryModel = require('../models/country.model');
+module.exports = {
     run: () =>
         new Promise((resolve) => {
             (async () => {
@@ -18,24 +15,8 @@ var dynamodb = new AWS.DynamoDB();module.exports = {
                         data.push(res)
                     })
                 }
-
-                //foreach for country name
-                let array= [];
-                let obj = {};
-                for(let country of data){
-                    obj.PutRequest = {
-                        Item : {"name": {S: country.name}}
-                    };
-                    array.push(obj);
-                }
-
-                let params = {
-                    RequestItems: {
-                        "countries": array
-                    }
-                };
-
-                dynamodb.batchWriteItem(params);
+                console.log("data",data)
+                await countryModel.insertMany(data);
                 resolve(true);
             })();
         }),

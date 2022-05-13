@@ -1,41 +1,34 @@
-const AWS = require("aws-sdk");
-const config = require('../../src/connection/db');
-AWS.config.update(config.aws_remote_config);
-
-var dynamodb = new AWS.DynamoDB();
-
-// aws dynamodb batch-write-item
+let leadModel = require('../models/lead.model');
 module.exports = {
     run: () =>
         new Promise((resolve) => {
             (async () => {
-                let params = {
-                    RequestItems: {
-                        "leads": [
-                            {
-                                PutRequest: {
-                                    Item: {
-                                        "sales_person_name": {S: "Poonam"},
-                                        "client_name": {S: "Pihu"},
-                                        "country_id": {N: "1"},
-                                        "title": {S: "Project1"},
-                                        "add_time": {Date: "1/1/2022"},
-                                        "close_time": {Date: "30/1/2022"},
-                                        "lost_time": {Date: "15/1/2022"},
-                                        "update_time": {Date: "20/1/2022"},
-                                        "next_activity_subject": {S: "activity subject"},
-                                        "lead_type": {S: "unbound"},
-                                        "stage_id": {N: "1"},
-                                        "stage_add_time": {Date: "1/1/2022"},
-                                        "stage_update_time": {Date: "11/1/2022"},
-                                        "status": {S: "won"},
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                };
-                dynamodb.batchWriteItem(params);
+                let lead = [
+                    {
+                        "sales_person_name": "Poonam",
+                        "client_name": "Pihu",
+                        "country_id": "1",
+                        "title":  "Project1",
+                        "add_time":  "2022-01-01T14:56:59.301Z",
+                        "close_time":  "2022-01-30T14:56:59.301Z",
+                        "lost_time":  "2022-01-15T14:56:59.301Z",
+                        "update_time":  "2022-01-15T14:56:59.301Z",
+                        "stage_add_time":  "2022-01-01T14:56:59.301Z",
+                        "stage_update_time":  "2022-01-11T14:56:59.301Z",
+                        "next_activity_subject":  "activity subject",
+                        "lead_type": "upbound",
+                        "stage_id": "1",
+                        "status": "won",
+                        // "add_time":  "1/1/2022",
+                        // "close_time":  "30/1/2022",
+                        // "lost_time":  "15/1/2022",
+                        // "update_time":  "15/1/2022",
+                        // "stage_add_time": "1/1/2022",
+                        // "stage_update_time": "11/1/2022",
+                    },
+                ]
+
+                await leadModel.insertMany(lead);
                 resolve(true);
             })();
         }),

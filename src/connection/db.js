@@ -1,11 +1,18 @@
-module.exports = {
-    aws_table_name: 'dynamodb-test',
-    aws_local_config: {
-        //Provide details for local configuration
-    },
-    aws_remote_config: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID ,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: process.env.AWS_DEFAULT_REGION,
-    }
-};
+const mongoose = require("mongoose");
+const {DB_AUTH_URL} = require("../../config/key");
+mongoose.connect(DB_AUTH_URL, {
+    keepAlive:true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+});
+
+mongoose.connection.on("error", (err) => {
+    console.log("err", err);
+    throw err;
+});
+
+mongoose.connection.on("connected", () => {
+    console.log("Mongoose is connected");
+});
+
+module.exports = {mongoose}

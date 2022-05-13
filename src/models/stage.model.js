@@ -1,10 +1,8 @@
-const dynamoose = require("dynamoose");
+const mongoose = require("mongoose");
 
-const StageSchema = new dynamoose.Schema({
+const StageSchema = new mongoose.Schema({
         "id":{
             type:String,
-            hashKey: true,
-            required: true,
         },
         "name": {
             type: String,
@@ -19,4 +17,4 @@ const StageSchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('roles', StageSchema);
+module.exports = mongoose.model('stages', StageSchema);

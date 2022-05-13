@@ -1,10 +1,8 @@
-const dynamoose = require("dynamoose");
+const mongoose = require("mongoose");
 
-const LeadSchema = new dynamoose.Schema({
+const LeadSchema = new mongoose.Schema({
         "id": {
             type: String,
-            hashKey: true,
-            required: true,
         },
         "sales_person_name": {
             type: String,
@@ -17,7 +15,6 @@ const LeadSchema = new dynamoose.Schema({
         "country_id": {
             type: Number,
             required: true,
-            rangeKey: true,
         },
         "title": {
             type: String,
@@ -40,7 +37,7 @@ const LeadSchema = new dynamoose.Schema({
         },
         "lead_type": {
             type: String,
-            default: 1,
+            default: "upbound",
             enum: ["inbound", "upbound"],
         },
         "stage_id": {
@@ -66,4 +63,4 @@ const LeadSchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('leads', LeadSchema);
+module.exports = mongoose.model('leads', LeadSchema);

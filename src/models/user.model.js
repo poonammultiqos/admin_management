@@ -1,10 +1,8 @@
-const dynamoose = require("dynamoose");
+const mongoose = require("mongoose");
 
-const UserSchema = new dynamoose.Schema({
+const UserSchema = new mongoose.Schema({
         "id":{
             type:String,
-            hashKey: true,
-            required: true,
         },
         "first_name": {
             type: String,
@@ -41,4 +39,4 @@ const UserSchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('users', UserSchema);
+module.exports = mongoose.model('users', UserSchema);

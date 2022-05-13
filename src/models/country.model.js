@@ -1,17 +1,15 @@
-const dynamoose = require("dynamoose");
+const mongoose = require("mongoose");
 
-const CountrySchema = new dynamoose.Schema({
+const CountrySchema = new mongoose.Schema({
         "id": {
             type: String,
-            hashKey: true,
-            required: true,
         },
         "name": {
             type: String,
             required: true
         },
         "code": {
-            type: Number
+            type: String
         }
     },
     {
@@ -21,4 +19,4 @@ const CountrySchema = new dynamoose.Schema({
         },
     });
 
-module.exports = dynamoose.model('countries', CountrySchema);
+module.exports = mongoose.model('countries', CountrySchema);
