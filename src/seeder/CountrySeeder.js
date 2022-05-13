@@ -15,7 +15,6 @@ module.exports = {
                         data.push(res)
                     })
                 }
-                console.log("data",data)
                 await countryModel.insertMany(data);
                 resolve(true);
             })();
