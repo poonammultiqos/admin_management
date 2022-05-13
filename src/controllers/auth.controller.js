@@ -16,6 +16,7 @@ exports.login = async (req, res) => {
         let userExist = User.findOne({email: reqParam.email, status: 1});
         if (userExist){
             await res.render(path.join(__dirname, "../../src/views/auth", "dashboard.ejs"));
+            return res.status(400);
         }
         await res.render(path.join(__dirname, "../../src/views/auth", "signin.ejs"));
 
